@@ -54,7 +54,7 @@ class PhysicsUniverse {
             let newAcc = [0, 0];
             for (const other of this.objects) {
                 if (other != object) {
-                    const vec = subtract(object.pos, other.pos);
+                    const vec = subtract(other.pos, object.pos);
                     const mag = other.mass / cubed(Math.hypot(...vec));
                     newAcc[0] += mag * vec[0];
                     newAcc[1] += mag * vec[1];
@@ -90,6 +90,8 @@ export function runUniverse(container, ...objects) {
         const circle = document.createElementNS(SVG_XMLNS, "circle");
         circle.setAttribute("r", o.radius.toString());
         circle.setAttribute("fill", `hsl(0, 0%, ${(1 - (o.mass / maxMass)) * 100}%)`);
+        circle.setAttribute("stroke", `black`);
+        circle.setAttribute("stroke-width", `1px`);
         container.appendChild(circle);
         circles.push(circle);
         const segment = document.createElementNS(SVG_XMLNS, "line");
@@ -113,4 +115,3 @@ export function runUniverse(container, ...objects) {
         universe.tick();
     }, 0);
 }
-//# sourceMappingURL=script.js.map

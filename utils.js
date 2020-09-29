@@ -16,4 +16,3 @@ export const cubed = (a) => {
 export const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
 export const subtract = (a, b) => [a[0] - b[0], a[1] - b[1]];
 export const scaled = (a, scale) => [a[0] * scale, a[1] * scale];
-//# sourceMappingURL=utils.js.map
