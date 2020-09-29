@@ -99,9 +99,9 @@ export function runUniverse(container, ...objects) {
         container.appendChild(segment);
     });
     setInterval(() => {
-        const center = universe.objects.reduce((acc, o) => [acc[0] + o.pos[0], acc[0] + o.pos[0]], [0, 0]) / universe.objects.length;
+        const adjustment = subtract([innerWidth / 2, innerHeight / 2], scaled(universe.objects.reduce((acc, o) => [acc[0] + o.pos[0], acc[1] + o.pos[1]], [0, 0]), 1 / universe.objects.length));
         zip(universe.objects, circles, segments).forEach(([o, circle, segment]) => {
-            const effectivePos = subtract(o.pos, center);
+            const effectivePos = add(o.pos, adjustment); // Keep everything centered
             const futureEffectivePos = add(effectivePos, scaled(o.vel, 100));
             circle.setAttribute("cx", effectivePos[0].toString());
             circle.setAttribute("cy", effectivePos[1].toString());
