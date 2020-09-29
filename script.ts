@@ -109,7 +109,7 @@ export function runUniverse(container: SVGSVGElement, ...objects: { pos: [number
     });
 
     setInterval(() => {
-        const center = universe.objects.reduce((acc, o) => [acc[0] + o.pos[0], acc[0] + o.pos[0]] as [number, number], [0, 0] as [number, number]);
+        const center = universe.objects.reduce((acc, o) => [acc[0] + o.pos[0], acc[0] + o.pos[0]] as [number, number], [0, 0] as [number, number]) / universe.objects.length;
 
         zip(universe.objects, circles, segments).forEach(([o, circle, segment]) => {
             const effectivePos = subtract(o.pos, center);

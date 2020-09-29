@@ -1,4 +1,4 @@
-import { add, subtract, scaled, cubed, zip } from "./utils";
+import { add, subtract, scaled, cubed, zip } from "./utils.js";
 // Units:
 //  Time:                   s    tick
 //  Length:                 m    screen
@@ -99,7 +99,7 @@ export function runUniverse(container, ...objects) {
         container.appendChild(segment);
     });
     setInterval(() => {
-        const center = universe.objects.reduce((acc, o) => [acc[0] + o.pos[0], acc[0] + o.pos[0]], [0, 0]);
+        const center = universe.objects.reduce((acc, o) => [acc[0] + o.pos[0], acc[0] + o.pos[0]], [0, 0]) / universe.objects.length;
         zip(universe.objects, circles, segments).forEach(([o, circle, segment]) => {
             const effectivePos = subtract(o.pos, center);
             const futureEffectivePos = add(effectivePos, scaled(o.vel, 100));
