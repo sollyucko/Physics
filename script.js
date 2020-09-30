@@ -78,8 +78,15 @@ class PhysicsUniverse {
         }
     }
 }
+
+let intervalHandle = null;
+
 const SVG_XMLNS = "http://www.w3.org/2000/svg";
 export function runUniverse(container, options, ...objects) {
+    container.innerHTML = "";
+    if(intervalHandle != null) {
+        clearInterval(intervalHandle);
+    }
     if (objects.length == 0)
         return;
     const universe = new PhysicsUniverse(...objects.map(o => new PhysicsObject(o.pos, o.vel, o.mass, o.radius)));
@@ -101,7 +108,7 @@ export function runUniverse(container, options, ...objects) {
         container.appendChild(segment);
     });
     let i = 0;
-    setInterval(() => {
+    intervalHandle = setInterval(() => {
         const adjustment = subtract([innerWidth / 2, innerHeight / 2], universe.objects[0].pos);
         zip(universe.objects, circles, segments).forEach(([o, circle, segment]) => {
             const effectivePos = add(o.pos, adjustment); // Keep everything centered

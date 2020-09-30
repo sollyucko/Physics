@@ -16,9 +16,21 @@
         height: 100%;
         width: 100%;
     }
+
+    #settings {
+        position: absolute;
+    }
 </style>
+<div id="settings">
+    Settings: 
+    <textarea id="settings-textarea">runUniverse(document.getElementById("svg"), {spacing: 100}, { pos: [0, 0], vel: [0, 0], mass: 25, radius: 20 }, { pos: [180, 0], vel: [0, .4], mass: 1, radius: 10 }, { pos: [0, 180], vel: [-.4, 0], mass: .000001, radius: 5 })</textarea>
+    <button id="settings-save-button">Save</button>
+</div>
 <svg id="svg"></svg>
 <script type="module">
     import { runUniverse } from "./script.js";
-    runUniverse(document.getElementById("svg"), {spacing: 100}, { pos: [0, 0], vel: [0, 0], mass: 25, radius: 20 }, { pos: [150, 100], vel: [.3, -.3], mass: 1, radius: 10 }, { pos: [-11.6, 180], vel: [.41, .11], mass: .01, radius: 5 });
+    document.getElementById("settings-save-button").onclick = function() {
+        eval(document.getElementById("settings-textarea").value);
+    };
+    eval(document.getElementById("settings-textarea").value);
 </script>
