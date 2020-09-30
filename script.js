@@ -79,7 +79,7 @@ class PhysicsUniverse {
     }
 }
 const SVG_XMLNS = "http://www.w3.org/2000/svg";
-export function runUniverse(container, ...objects) {
+export function runUniverse(container, options, ...objects) {
     if (objects.length == 0)
         return;
     const universe = new PhysicsUniverse(...objects.map(o => new PhysicsObject(o.pos, o.vel, o.mass, o.radius)));
@@ -100,6 +100,7 @@ export function runUniverse(container, ...objects) {
         segments.push(segment);
         container.appendChild(segment);
     });
+    let i = 0;
     setInterval(() => {
         const adjustment = subtract([innerWidth / 2, innerHeight / 2], universe.objects[0].pos);
         zip(universe.objects, circles, segments).forEach(([o, circle, segment]) => {
@@ -111,6 +112,19 @@ export function runUniverse(container, ...objects) {
             segment.setAttribute("y1", effectivePos[1].toString());
             segment.setAttribute("x2", futureEffectivePos[0].toString());
             segment.setAttribute("y2", futureEffectivePos[1].toString());
+
+            if(i == 0) {
+                const point = document.createElementNS(SVG_XMLNS, "circle");
+                point.setAttribute("cx", effectivePos[0].toString());
+                point.setAttribute("cy", effectivePos[1].toString());
+                point.setAttribute("r", 1);
+                point.setAttribute("fill", `hsl(0, 0%, ${(1 - (o.mass / maxMass)) * 100}%)`);
+                point.setAttribute("stroke", `black`);
+                point.setAttribute("stroke-width", `1px`);
+                container.appendChild(point);
+            }
+            i += 1;
+            i %= options.spacing;
         });
         universe.tick();
     }, 0);
