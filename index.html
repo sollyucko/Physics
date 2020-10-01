@@ -23,7 +23,10 @@
 </style>
 <div id="settings">
     Settings: 
-    <textarea id="settings-textarea">runUniverse(document.getElementById("svg"), {spacing: 100}, { pos: [0, 0], vel: [0, 0], mass: 25, radius: 20 }, { pos: [180, 0], vel: [0, .4], mass: 1, radius: 10 }, { pos: [0, 180], vel: [-.4, 0], mass: .000001, radius: 5 })</textarea>
+    <textarea id="settings-textarea">
+        runUniverse(document.getElementById("svg"), {spacing: 100}, { pos: [0, 0], vel: [0, 0], mass: 25, radius: 20 }, { pos: [180, 0], vel: [0, .4], mass: 1, radius: 10 }, { pos: [0, 180], vel: [-.4, 0], mass: .000001, radius: 5 }); // 90 deg, unstable
+        // runUniverse(document.getElementById("svg"), {spacing: 100}, { pos: [0, 0], vel: [0, 0], mass: 25, radius: 20 }, { pos: [150, 100], vel: [.3, -.3], mass: 1, radius: 10 }, { pos: [-11.6, 180], vel: [.41, .11], mass: .01, radius: 5 }); // L5, stable
+    </textarea>
     <button id="settings-save-button">Save</button>
 </div>
 <svg id="svg"></svg>
